@@ -1,12 +1,14 @@
 {
   "updated_at": "2026-09-16",
-  "_schema_note": "第一层事实基线。category/channel/license 是寻源事实(季度核对);latest_version 是变化层(每次刷新);grade 是供应商分级,由判断层按 QCDS 信号更新,查不到就保持『未评级』,禁止拍脑袋。",
+  "_schema_note": "第一层事实基线。category/channel/license 是寻源事实(季度核对);latest_version 是变化层(每次刷新);grade 是供应商分级,由判断层按 QCDS 信号更新,查不到就保持『未评级』,禁止拍脑袋。price/price_note 是挂牌价快照(人工核对字段):定价页全是 JS 渲染抓不到表,系统不编数——有公开价目填官网标价+『待复核』,无公开价目明说『询价/项目制』,核对走台账里的定价页直达链接,核完更新本文件。",
   "products": {
     "aliyun-bailian": {
       "product": "阿里云百炼",
       "category": "云资源/AI平台",
       "channel": "原厂直签",
       "license": "按量/订阅",
+      "price": "按量计费",
+      "price_note": "模型按 token 计费,新客有免费额度;企业包年走商务询价",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -15,6 +17,8 @@
       "category": "云上研发工具",
       "channel": "原厂直签",
       "license": "订阅/按量",
+      "price": "订阅制",
+      "price_note": "按版本/人数阶梯,原厂与云市场价差大,询价后录入比价器",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -23,6 +27,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "Pro $20/月",
+      "price_note": "官网标价快照,待复核(定价页 JS 渲染);企业档询价",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -31,6 +37,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "见定价页",
+      "price_note": "无稳定定价页 URL(/code/pricing 重定向),订阅/充值档询价",
       "grade": "未评级",
       "latest_version": "0.43.0（2026-09-14）"
     },
@@ -39,6 +47,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "见定价页",
+      "price_note": "定价页 JS 渲染抓不到数;商务档询价",
       "grade": "未评级",
       "latest_version": "4.12.0 (2026-09-04)"
     },
@@ -47,6 +57,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "约 ¥20/月起",
+      "price_note": "GLM Coding 套餐档位快照,待复核;企业档询价",
       "grade": "未评级",
       "latest_version": "3.11.2"
     },
@@ -55,6 +67,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "见定价页",
+      "price_note": "定价页 JS 渲染;订阅档询价",
       "grade": "未评级",
       "latest_version": "v3.0.72 — 2026-09-14"
     },
@@ -63,6 +77,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "Pro $10/月",
+      "price_note": "2026-09-16 实测定价页静态文案:免费 7 天后 $10/月;企业档询价",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -71,6 +87,8 @@
       "category": "AI工具席位",
       "channel": "原厂直签/官网",
       "license": "订阅(按席位)",
+      "price": "询价",
+      "price_note": "官网未挂公开价目",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -79,6 +97,8 @@
       "category": "开源自部署",
       "channel": "开源(自部署)",
       "license": "开源(需采购实施/支持服务)",
+      "price": "¥0 开源",
+      "price_note": "软件开源;实际采购的是实施/支持服务,按人天询价",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -87,6 +107,8 @@
       "category": "开源自部署",
       "channel": "开源(自部署)",
       "license": "开源(需采购实施/支持服务)",
+      "price": "¥0 开源",
+      "price_note": "软件开源;实际采购的是实施/支持服务,按人天询价",
       "grade": "未评级",
       "latest_version": "dsh-v0.1.6-alpha.1"
     },
@@ -95,6 +117,8 @@
       "category": "办公套件",
       "channel": "原厂直签",
       "license": "订阅(按席位)",
+      "price": "专业版 ¥9,800/年",
+      "price_note": "官网标价快照,待复核;专属版商务询价;复核走官网 VIP 栏",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -103,6 +127,8 @@
       "category": "办公套件",
       "channel": "原厂直签",
       "license": "订阅(按席位)",
+      "price": "商务版 ¥1,080/人/年",
+      "price_note": "官网标价快照,待复核;企业版商务询价",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -111,6 +137,8 @@
       "category": "ERP企业管理",
       "channel": "原厂/代理商",
       "license": "订阅(项目制)",
+      "price": "项目制报价",
+      "price_note": "无公开价目,走商务询价;询回来录入比价器三家比",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -119,6 +147,8 @@
       "category": "云资源/AI平台",
       "channel": "原厂直签",
       "license": "按量/订阅",
+      "price": "—",
+      "price_note": "调价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -127,6 +157,8 @@
       "category": "AI工具席位",
       "channel": "原厂官网",
       "license": "订阅(按席位)",
+      "price": "—",
+      "price_note": "定价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -135,6 +167,8 @@
       "category": "AI工具席位",
       "channel": "原厂官网",
       "license": "订阅(按席位)",
+      "price": "—",
+      "price_note": "定价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -143,6 +177,8 @@
       "category": "AI工具席位",
       "channel": "原厂官网",
       "license": "订阅(按席位)",
+      "price": "—",
+      "price_note": "定价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -151,6 +187,8 @@
       "category": "AI工具席位",
       "channel": "原厂官网",
       "license": "订阅(按席位)",
+      "price": "—",
+      "price_note": "定价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -159,6 +197,8 @@
       "category": "办公套件",
       "channel": "原厂官网",
       "license": "订阅(按席位)",
+      "price": "—",
+      "price_note": "定价情报源,非采购品",
       "grade": "未评级",
       "latest_version": ""
     },
@@ -167,6 +207,8 @@
       "category": "办公套件",
       "channel": "原厂官网/授权代理商",
       "license": "订阅(按席位)",
+      "price": "商业版 约 ¥288/人/年",
+      "price_note": "标价快照,待复核(购买页 JS 渲染);代理商渠道常低于原厂,两家都问",
       "grade": "未评级",
       "latest_version": ""
     }
