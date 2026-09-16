@@ -1,0 +1,217 @@
+# 源注册表 —— 唯一事实源。抓取(fetch)与核验(verify)都以此表为准。
+# 场景:IT 品类供应商寻源情报(云资源 / 软件席位 / 开源自部署)。
+# category: 品类(寻源视角)——云资源 / 云上研发工具 / AI工具席位 / 办公套件 / ERP企业管理 / 开源自部署
+# channel: 采购渠道(JD3「快速找到购买渠道」)——原厂官网 / 云市场 / 授权代理商 / 开源(实施走服务商)
+# price_page: 定价页入口(有公开价目=可监控比价;无=商务询价,走 compare_quotes 录入比价)
+# type: changelog_html | github_release | official_account | media
+# tier: official | media_authoritative | media_industry
+# enabled: false 可临时关掉某个源
+
+sources:
+  # ===== 云资源 / 云上研发工具(有公开价目,调价信号可监控) =====
+  - id: aliyun-bailian
+    product: 阿里云百炼
+    category: 云资源/AI平台
+    channel: 原厂官网/阿里云云市场
+    price_page: https://www.aliyun.com/price/product   # JS渲染,LLM 盲区
+    type: changelog_html
+    url: https://help.aliyun.com/zh/model-studio/application-release-notes
+    domain: aliyun.com
+    tier: official
+  - id: huawei-codearts
+    product: 华为云CodeArts
+    category: 云上研发工具
+    channel: 原厂官网/华为云云市场
+    type: changelog_html
+    url: https://codearts.huaweicloud.com/changelog.html
+    domain: huaweicloud.com
+    tier: official
+
+  # ===== AI 工具席位(按席位订阅;个人档公开价,企业档商务询价,锚定个人档比价) =====
+  - id: qoder
+    product: Qoder
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://qoder.com/zh/changelog
+    domain: qoder.com
+    tier: official
+  - id: qoder-pricing
+    product: Qoder定价
+    category: AI工具席位
+    channel: 原厂官网
+    type: official_account
+    url: https://qoder.com/pricing
+    domain: qoder.com
+    tier: official
+  - id: kimi-code
+    product: Kimi Code
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://www.kimi.com/code/docs/kimi-code-cli/release-notes/changelog.html
+    domain: kimi.com
+    tier: official
+    # 无稳定定价页 URL(/code/pricing 重定向回首页),价格信号靠 LLM 搜
+  - id: codebuddy
+    product: CodeBuddy
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://www.codebuddy.cn/docs/ide/release-notes/release-notes
+    domain: codebuddy.cn
+    tier: official
+  - id: codebuddy-pricing
+    product: CodeBuddy定价
+    category: AI工具席位
+    channel: 原厂官网
+    type: official_account
+    url: https://codebuddy.cn/pricing/
+    domain: codebuddy.cn
+    tier: official
+  - id: zcode
+    product: 智谱ZCode
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://zcode.z.ai/cn/changelog
+    domain: z.ai
+    tier: official
+    # 未找到独立定价页,价格信号靠 LLM 搜
+  - id: minimax-agent
+    product: MiniMax Agent/Code
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://agent.minimaxi.com/docs/changelog
+    domain: minimaxi.com
+    tier: official
+  - id: minimax-pricing
+    product: MiniMax定价
+    category: AI工具席位
+    channel: 原厂官网
+    type: official_account
+    url: https://agent.minimaxi.com/pricing
+    domain: minimaxi.com
+    tier: official
+  - id: trae
+    product: Trae
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://www.trae.ai/changelog
+    domain: trae.ai
+    tier: official
+  - id: trae-pricing
+    product: Trae定价
+    category: AI工具席位
+    channel: 原厂官网
+    type: official_account
+    url: https://www.trae.ai/pricing
+    domain: trae.ai
+    tier: official
+  - id: astronclaw
+    product: 讯飞AstronClaw
+    category: AI工具席位
+    channel: 原厂官网
+    type: changelog_html
+    url: https://agent.xfyun.cn/astron-claw
+    domain: xfyun.cn
+    tier: official
+
+  # ===== 办公套件(公开企业版定价,真实比价品类) =====
+  - id: feishu-pricing
+    product: 飞书定价
+    category: 办公套件
+    channel: 原厂官网
+    type: official_account
+    url: https://www.feishu.cn/pricing
+    domain: feishu.cn
+    tier: official
+  - id: tencent-meeting
+    product: 腾讯会议
+    category: 办公套件
+    channel: 原厂官网/授权代理商
+    type: official_account
+    url: https://meeting.tencent.com/buy/
+    domain: tencent.com
+    tier: official
+  - id: dingtalk
+    product: 钉钉
+    category: 办公套件
+    channel: 原厂官网
+    type: official_account
+    url: https://www.dingtalk.com/
+    domain: dingtalk.com
+    tier: official
+    # 定价入口在官网首页 VIP 栏(动态页),脚本抓不到正文,靠 LLM 搜「钉钉 专业版 价格」
+
+  # ===== ERP企业管理(项目制报价,无公开价,商务询价后走 compare_quotes) =====
+  - id: kingdee
+    product: 金蝶云
+    category: ERP企业管理
+    channel: 原厂/授权代理商
+    type: official_account
+    url: https://www.kingdee.com
+    domain: kingdee.com
+    tier: official
+
+  # ===== 开源自部署(软件 0 元,采购的是实施/支持服务,release 决定升级节奏) =====
+  - id: trae-agent
+    product: Trae-Agent
+    category: 开源自部署
+    channel: 开源(实施服务走服务商)
+    type: github_release
+    repo: bytedance/trae-agent
+    domain: github.com
+    tier: official
+  - id: deepseek-harness
+    product: DeepSeek Harness
+    category: 开源自部署
+    channel: 开源(实施服务走服务商)
+    type: github_release
+    repo: deepseek-ai/deepseek-harness
+    domain: github.com
+    tier: official
+
+  # ===== 阿里云调价公告(盲区:价格页 JS 渲染抓不到表) =====
+  - id: aliyun-price
+    product: 阿里云调价公告
+    category: 云资源/AI平台
+    channel: 原厂官网
+    type: official_account
+    url: https://www.aliyun.com/price/product
+    domain: aliyun.com
+    tier: official
+    # 调价信号靠 LLM 搜「阿里云 降价 公告」
+
+  # ===== 行业媒体(排名/格局/舆情,LLM 搜索时用作域名白名单) =====
+  - id: sina-tech
+    product: 通用
+    category: 通用
+    type: media
+    domain: sina.com.cn
+    tier: media_authoritative
+  - id: ccgp
+    product: 通用
+    category: 通用
+    type: media
+    domain: ccgp.gov.cn
+    tier: media_authoritative
+    # 中国政府采购网:大单中标价/供应商名录,采购侧权威源
+  - id: 36kr
+    name: 36氪
+    category: 通用
+    type: ai_media
+    tier: media_industry
+  - id: infoq
+    name: InfoQ
+    category: 通用
+    type: ai_media
+    tier: media_industry
+
+# 转载降级域:命中即标「转载」,非原发
+repost_domains:
+  - 163.com
+  - ce.cn
+  - finance.eastmoney.com

@@ -1,0 +1,174 @@
+{
+  "updated_at": "2026-09-16",
+  "_schema_note": "第一层事实基线。category/channel/license 是寻源事实(季度核对);latest_version 是变化层(每次刷新);grade 是供应商分级,由判断层按 QCDS 信号更新,查不到就保持『未评级』,禁止拍脑袋。",
+  "products": {
+    "aliyun-bailian": {
+      "product": "阿里云百炼",
+      "category": "云资源/AI平台",
+      "channel": "原厂直签",
+      "license": "按量/订阅",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "huawei-codearts": {
+      "product": "华为云CodeArts",
+      "category": "云上研发工具",
+      "channel": "原厂直签",
+      "license": "订阅/按量",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "qoder": {
+      "product": "Qoder",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "kimi-code": {
+      "product": "Kimi Code",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": "0.43.0（2026-09-14）"
+    },
+    "codebuddy": {
+      "product": "CodeBuddy",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": "4.12.0 (2026-09-04)"
+    },
+    "zcode": {
+      "product": "智谱ZCode",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": "3.11.2"
+    },
+    "minimax-agent": {
+      "product": "MiniMax Agent/Code",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": "v3.0.72 — 2026-09-14"
+    },
+    "trae": {
+      "product": "Trae",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "astronclaw": {
+      "product": "讯飞AstronClaw",
+      "category": "AI工具席位",
+      "channel": "原厂直签/官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "trae-agent": {
+      "product": "Trae-Agent",
+      "category": "开源自部署",
+      "channel": "开源(自部署)",
+      "license": "开源(需采购实施/支持服务)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "deepseek-harness": {
+      "product": "DeepSeek Harness",
+      "category": "开源自部署",
+      "channel": "开源(自部署)",
+      "license": "开源(需采购实施/支持服务)",
+      "grade": "未评级",
+      "latest_version": "dsh-v0.1.6-alpha.1"
+    },
+    "dingtalk": {
+      "product": "钉钉",
+      "category": "办公套件",
+      "channel": "原厂直签",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "feishu": {
+      "product": "飞书",
+      "category": "办公套件",
+      "channel": "原厂直签",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "kingdee": {
+      "product": "金蝶云",
+      "category": "ERP企业管理",
+      "channel": "原厂/代理商",
+      "license": "订阅(项目制)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "aliyun-price": {
+      "product": "阿里云调价公告",
+      "category": "云资源/AI平台",
+      "channel": "原厂直签",
+      "license": "按量/订阅",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "qoder-pricing": {
+      "product": "Qoder定价",
+      "category": "AI工具席位",
+      "channel": "原厂官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "codebuddy-pricing": {
+      "product": "CodeBuddy定价",
+      "category": "AI工具席位",
+      "channel": "原厂官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "minimax-pricing": {
+      "product": "MiniMax定价",
+      "category": "AI工具席位",
+      "channel": "原厂官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "trae-pricing": {
+      "product": "Trae定价",
+      "category": "AI工具席位",
+      "channel": "原厂官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "feishu-pricing": {
+      "product": "飞书定价",
+      "category": "办公套件",
+      "channel": "原厂官网",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    },
+    "tencent-meeting": {
+      "product": "腾讯会议",
+      "category": "办公套件",
+      "channel": "原厂官网/授权代理商",
+      "license": "订阅(按席位)",
+      "grade": "未评级",
+      "latest_version": ""
+    }
+  }
+}

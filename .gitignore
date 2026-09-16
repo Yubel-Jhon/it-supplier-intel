@@ -1,0 +1,5 @@
+# 每日抓取产物不入库(体积大且可再生);基线/增量快照/报价样例入库
+data/raw/
+scripts/__pycache__/
+__pycache__/
+*.pyc

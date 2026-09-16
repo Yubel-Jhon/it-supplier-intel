@@ -1,0 +1,59 @@
+{
+  "demand": {
+    "item": "AI 编码助手 企业席位 200 席 × 1 年",
+    "budget": 800000,
+    "need_by": "2026-11-30",
+    "must": ["SLA ≥ 99.9%", "管理后台可审计使用数据", "续约涨幅上锁"],
+    "nice": ["管理员培训", "专属客户成功"]
+  },
+  "quotes": [
+    {
+      "supplier": "原厂直签",
+      "channel_type": "原厂",
+      "unit_price": 3600,
+      "seats": 200,
+      "years": 1,
+      "payment": "预付年付",
+      "prepay_pct": 100,
+      "tax_included": true,
+      "valid_until": "2026-10-31",
+      "free_seats": 0,
+      "sla": "99.9",
+      "support": "工作日工单 + 专属客户成功",
+      "extras": ["版本免费升级"],
+      "notes": "原厂商务报,含税"
+    },
+    {
+      "supplier": "代理商A",
+      "channel_type": "代理商",
+      "unit_price": 3080,
+      "seats": 200,
+      "years": 1,
+      "payment": "月付",
+      "prepay_pct": 9,
+      "tax_included": true,
+      "valid_until": "2026-10-15",
+      "free_seats": 0,
+      "sla": "99.9",
+      "support": "工作日工单",
+      "extras": [],
+      "notes": "月付,现金压力小"
+    },
+    {
+      "supplier": "代理商B",
+      "channel_type": "代理商",
+      "unit_price": 3400,
+      "seats": 200,
+      "years": 1,
+      "payment": "预付年付",
+      "prepay_pct": 100,
+      "tax_included": false,
+      "valid_until": "",
+      "free_seats": 15,
+      "sla": "99.95",
+      "support": "7x24 工单",
+      "extras": ["管理员培训 2 场", "送杀毒席位 1 年"],
+      "notes": "送 15 席,报价不含税(口径与其他家不一致,工具会打旗)"
+    }
+  ]
+}
