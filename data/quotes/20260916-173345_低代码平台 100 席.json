@@ -1,0 +1,62 @@
+{
+  "demand": {
+    "budget": 500000,
+    "item": "低代码平台 100 席",
+    "must": [
+      "SLA ≥ 99.9%，续约涨幅上锁"
+    ],
+    "need_by": "2026-12-01"
+  },
+  "quotes": [
+    {
+      "channel_type": "原厂",
+      "extras": [
+        "培训 1 场"
+      ],
+      "free_seats": null,
+      "payment": "预付年付",
+      "prepay_pct": 100,
+      "seats": 100,
+      "sla": "99.9",
+      "supplier": "原厂",
+      "support": "7x24 工单",
+      "tax_included": true,
+      "total_price": 500000,
+      "unit_price": 5000,
+      "valid_until": "2026-10-01",
+      "years": 1
+    },
+    {
+      "channel_type": "代理商",
+      "extras": [],
+      "free_seats": 10,
+      "payment": "月付",
+      "prepay_pct": 10,
+      "seats": 100,
+      "sla": "99.99",
+      "supplier": "代理",
+      "support": "工作日工单",
+      "tax_included": false,
+      "total_price": 420000,
+      "unit_price": 4200,
+      "valid_until": "",
+      "years": 1
+    },
+    {
+      "channel_type": "代理商",
+      "extras": [],
+      "free_seats": null,
+      "payment": "未填",
+      "prepay_pct": null,
+      "seats": null,
+      "sla": "",
+      "supplier": "缺席位家",
+      "support": "",
+      "tax_included": null,
+      "total_price": null,
+      "unit_price": 3900,
+      "valid_until": "",
+      "years": 1
+    }
+  ]
+}

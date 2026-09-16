@@ -25,12 +25,9 @@ CASH_ANNUAL = 0.05  # 年化资金成本,预付年付的机会成本近似
 
 
 def load(path):
+    """读报价 JSON,返回 (demand, quotes)。不校验数量——校验交给调用方(CLI 退出/接口报 400)。"""
     data = json.load(open(path, encoding="utf-8"))
-    demand = data.get("demand", {})
-    quotes = data.get("quotes", [])
-    if len(quotes) < 2:
-        sys.exit("报价不足 2 家,没法比。检查 data/quotes/*.json")
-    return demand, quotes
+    return data.get("demand", {}), data.get("quotes", [])
 
 
 def eff_unit_price(q):
@@ -177,44 +174,106 @@ def red_flags(quotes, demand):
     return flags
 
 
-def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT
-    if not os.path.exists(path):
-        sys.exit(f"未找到 {path},先准备报价 JSON")
-    demand, quotes = load(path)
+_NUM_KEYS = ("unit_price", "seats", "free_seats", "years",
+             "total_price", "prepay_pct", "sla")
+
+
+def coerce_numbers(demand, quotes):
+    """宽松转数值:表单/JSON 粘贴常带字符串数字('5000'),直接算术会炸。
+    只动已知数字键,转不动的原样保留(日期/文本/口径不动)。"""
+    def one(d, keys):
+        if not isinstance(d, dict):
+            return
+        for k in keys:
+            v = d.get(k)
+            if isinstance(v, str) and v.strip():
+                try:
+                    f = float(v.strip().rstrip("%").replace(",", ""))
+                    d[k] = int(f) if f.is_integer() else f
+                except ValueError:
+                    pass
+    if isinstance(demand, dict):
+        one(demand, ("budget",))
+    for q in (quotes if isinstance(quotes, list) else []):
+        one(q, _NUM_KEYS)
+
+
+def build_report(demand, quotes):
+    """算术 + 规则判定,产出结构化报告(dict)。CLI 与工作台接口共用这一条路径,
+    保证「命令行出的表」和「面板出的表」永远是同一套算法。"""
+    coerce_numbers(demand, quotes)
     rows = score_quotes(quotes, demand)
     eff = {id(r["q"]): eff_unit_price(r["q"]) for r in rows}
-    today = date.today().isoformat()
+    out_rows = []
+    for i, r in enumerate(rows, 1):
+        q = r["q"]
+        e = eff.get(id(q))
+        out_rows.append({
+            "rank": i, "supplier": q.get("supplier", "未填"),
+            "channel_type": q.get("channel_type", "未填"),
+            "total_price": q.get("total_price"), "eff_unit_price": e,
+            "payment": q.get("payment", "未填"), "sla": q.get("sla", "未填"),
+            "support": q.get("support", "未填"), "extras": q.get("extras", []),
+            "score": r["score"], "prepay_pct": q.get("prepay_pct"),
+            "tax_included": q.get("tax_included"),
+            "free_seats": q.get("free_seats") or 0,
+        })
+    return {
+        "date": date.today().isoformat(),
+        "item": demand.get("item", "未填采购项"),
+        "budget": demand.get("budget"), "need_by": demand.get("need_by"),
+        "must": demand.get("must", []),
+        "rows": out_rows,
+        "negotiation": negotiation_points(quotes, demand),
+        "flags": red_flags(quotes, demand),
+        "top": out_rows[0] if out_rows else None,
+    }
 
-    L = [f"# 三方比价 · {demand.get('item', '未填采购项')} · {today}", ""]
-    L.append(f"需求:预算 {demand.get('budget', '未填')} 元 | 期望到货 {demand.get('need_by', '未填')} | "
-             f"必达:{'、'.join(demand.get('must', [])) or '未填'}")
+
+def _num(v, fmt="{:,.0f}"):
+    return fmt.format(v) if isinstance(v, (int, float)) else "未填"
+
+
+def render_md(rep):
+    """结构化报告 -> markdown,与旧版 CLI 输出同一格式。"""
+    L = [f"# 三方比价 · {rep['item']} · {rep['date']}", ""]
+    L.append(f"需求:预算 {_num(rep['budget'])} 元 | 期望到货 {rep['need_by'] or '未填'} | "
+             f"必达:{'、'.join(rep['must']) or '未填'}")
     L.append("")
     L.append("## 一、比价表")
     L.append("")
     L.append("| 排名 | 供应商 | 渠道 | 总价(元) | 折算有效单价(元/席/年) | 账期 | SLA | 支持 | 赠项 | 加权分 |")
     L.append("|---|---|---|---|---|---|---|---|---|---|")
-    for i, r in enumerate(rows, 1):
-        q = r["q"]
-        e = eff.get(id(q))
-        L.append(f"| {i} | {q['supplier']} | {q.get('channel_type', '未填')} "
-                 f"| {q.get('total_price', '未填'):,.0f} | {e:,.0f} | {q.get('payment', '未填')} "
-                 f"| {q.get('sla', '未填')} | {q.get('support', '未填')} "
-                 f"| {'、'.join(q.get('extras', [])) or '—'} | {r['score']} |")
+    for r in rep["rows"]:
+        L.append(f"| {r['rank']} | {r['supplier']} | {r['channel_type']} "
+                 f"| {_num(r['total_price'])} | {_num(r['eff_unit_price'])} | {r['payment']} "
+                 f"| {r['sla']} | {r['support']} "
+                 f"| {'、'.join(r['extras']) or '—'} | {r['score']} |")
     L.append("")
     L.append("## 二、议价点")
-    L.extend(f"- {p}" for p in negotiation_points(quotes, demand))
+    L.extend(f"- {p}" for p in rep["negotiation"])
     L.append("")
     L.append("## 三、合规红旗")
-    L.extend(f"- 🚩 {f}" for f in red_flags(quotes, demand))
+    L.extend(f"- 🚩 {f}" for f in rep["flags"])
     L.append("")
     L.append("## 四、建议动作")
-    top = rows[0]["q"]
-    L.append(f"- 综合分最高:{top['supplier']}({rows[0]['score']} 分)。加权含价格 40%/SLA 20%/支持 15%/商务 15%/背景 10%,"
-             f"权重按本项目可调,不是黑箱打分")
+    top = rep["top"]
+    if top:
+        L.append(f"- 综合分最高:{top['supplier']}({top['score']} 分)。加权含价格 40%/SLA 20%/支持 15%/商务 15%/背景 10%,"
+                 f"权重按本项目可调,不是黑箱打分")
     L.append("- 上会前:必达项书面确认 + 续约涨幅条款落合同 + 三家报价单归档(审计留痕)")
     L.append("")
-    out = "\n".join(L)
+    return "\n".join(L)
+
+
+def main():
+    path = sys.argv[1] if len(sys.argv) > 1 else DEFAULT
+    if not os.path.exists(path):
+        sys.exit(f"未找到 {path},先准备报价 JSON")
+    demand, quotes = load(path)
+    if len(quotes) < 2:
+        sys.exit("报价不足 2 家,没法比。检查 data/quotes/*.json")
+    out = render_md(build_report(demand, quotes))
     out_path = os.path.splitext(path)[0] + "_比价表.md"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(out)

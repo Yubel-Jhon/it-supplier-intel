@@ -1,0 +1,32 @@
+{
+  "demand": {
+    "budget": 800000,
+    "item": "x"
+  },
+  "quotes": [
+    {
+      "payment": "预付年付",
+      "prepay_pct": 100,
+      "seats": 100,
+      "sla": 99.9,
+      "supplier": "a",
+      "support": "工作日工单",
+      "tax_included": "含税",
+      "unit_price": 5000,
+      "years": 1,
+      "total_price": 500000
+    },
+    {
+      "payment": "月付",
+      "prepay_pct": 9,
+      "seats": 100,
+      "sla": 99.95,
+      "supplier": "b",
+      "support": "7x24 工单",
+      "tax_included": "含税",
+      "unit_price": 4200,
+      "years": 1,
+      "total_price": 420000
+    }
+  ]
+}
